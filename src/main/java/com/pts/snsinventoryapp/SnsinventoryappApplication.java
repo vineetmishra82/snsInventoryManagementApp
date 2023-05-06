@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.pts.snsinventoryapp.controller","com.pts.snsinventoryapp.service"})
+@ComponentScan(basePackages = {"com.pts.snsinventoryapp.controller","com.pts.snsinventoryapp.service","com.pts.snsinventoryapp.configuration"})
 @EnableMongoRepositories("com.pts.snsinventoryapp.repositories")
 public class SnsinventoryappApplication {
 	
