@@ -49,6 +49,11 @@ public class ServiceData {
 		return false;
 	}
 	
+	//Dummy method 
+	
+	public boolean dummyMethod() {
+		return true;
+	}
 	
 
 }
