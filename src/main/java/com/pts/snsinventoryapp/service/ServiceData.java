@@ -2,6 +2,7 @@ package com.pts.snsinventoryapp.service;
 
 import java.util.List;
 
+import org.bson.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,16 @@ public class ServiceData {
 		return false;
 		
 		
+		
+	}
+
+	public boolean addItem(String details) {
+		
+		JsonObject jsonObject = new JsonObject(details);
+		
+		
+		
+		return false;
 	}
 	
 	
