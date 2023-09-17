@@ -15,7 +15,7 @@ public class CorsConfiguration
             @Override
             public void addCorsMappings(CorsRegistry registry) {
             	registry.addMapping("/**")
-            	.allowedOrigins("*","https://sns-inventory-app-82ddc50c51dc.herokuapp.com/")
+            	.allowedOrigins("*","https://sns-inventory-app-82ddc50c51dc.herokuapp.com/","http://localhost:3000/")
                 .allowedMethods("*");            	
             	
             }
