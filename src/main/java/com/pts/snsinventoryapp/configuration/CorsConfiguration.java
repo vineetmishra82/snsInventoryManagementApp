@@ -16,7 +16,8 @@ public class CorsConfiguration
             public void addCorsMappings(CorsRegistry registry) {
             	registry.addMapping("/**")
             	.allowedOrigins("*","https://sns-inventory-app-82ddc50c51dc.herokuapp.com/","http://localhost:3000/")
-                .allowedMethods("*");            	
+                .allowedMethods("*")
+                .allowedHeaders("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");;            	
             	
             }
         };
