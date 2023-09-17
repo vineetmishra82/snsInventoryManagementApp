@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pts.snsinventoryapp.model.Admin;
+import com.pts.snsinventoryapp.model.Category;
+import com.pts.snsinventoryapp.model.Unit;
 import com.pts.snsinventoryapp.repositories.AdminRepo;
-
+import com.pts.snsinventoryapp.repositories.CategoryRepo;
+import com.pts.snsinventoryapp.repositories.UnitRepo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +25,12 @@ public class ServiceData {
 	
 	@Autowired
 	AdminRepo adminRepo;
+	
+	@Autowired
+	CategoryRepo categoryRepo;
+	
+	@Autowired
+	UnitRepo unitRepo;
 
 	public boolean adminLogin(String userId, String password) {
 		
@@ -48,12 +57,19 @@ public class ServiceData {
 		
 		return false;
 	}
-	
-	//Dummy method 
-	
-	public boolean dummyMethod() {
-		return true;
+
+	public List<Category> getCategories() {
+		// TODO Auto-generated method stub
+		return categoryRepo.findAll();
 	}
+
+	public List<Unit> getUnits() {
+		// TODO Auto-generated method stub
+		return unitRepo.findAll();
+	}
+	
+	
+	
 	
 
 }
