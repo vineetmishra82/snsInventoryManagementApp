@@ -57,4 +57,10 @@ public class Controller {
 	{
 		return service.getUnits();
 	}
+	
+	@PostMapping("createUnit")
+	public int createUnit(@RequestParam String unitName)
+	{
+		return service.createUnit(unitName);
+	}
 }

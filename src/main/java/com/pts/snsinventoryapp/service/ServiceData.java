@@ -67,6 +67,29 @@ public class ServiceData {
 		// TODO Auto-generated method stub
 		return unitRepo.findAll();
 	}
+
+	public int createUnit(String unitName) {
+		
+		List<Unit> units = unitRepo.findAll();
+		
+		for (Unit unit : units) {
+			if(unit.getUnitName().toLowerCase().equals(unitName.toLowerCase()))
+			{
+				return -1;
+			}
+		}
+		
+		try {
+			Unit unit = new Unit(unitName);
+			unitRepo.save(unit);
+		}
+		catch(Exception e)
+		{
+			return 0;
+		}
+		
+		return 1;
+	}
 	
 	
 	
