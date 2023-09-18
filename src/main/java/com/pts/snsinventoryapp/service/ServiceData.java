@@ -1,6 +1,7 @@
 package com.pts.snsinventoryapp.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.logging.log4j.message.Message;
 import org.bson.json.JsonObject;
@@ -32,6 +33,8 @@ public class ServiceData {
 	
 	@Autowired
 	UnitRepo unitRepo;
+
+	private int opsResult;
 
 	public boolean adminLogin(String userId, String password) {
 		
@@ -94,63 +97,42 @@ public class ServiceData {
 
 	public int updateUnit(String oldUnitName, String newUnitName) {
 		
-		List<Unit> units = unitRepo.findAll();
-		Unit unitSelected = null;
-		int index = -1;
+	Optional<Unit> unit = unitRepo.findById(oldUnitName);
+	
+	
+	unit.ifPresentOrElse((value) -> {
 		
-		for (Unit unit : units) {
-			if(unit.getUnitName().toLowerCase().equals(oldUnitName.toLowerCase()))
-			{
-				unitSelected = unit;
-				index = units.indexOf(unit);
-				break;
-			}
-		}
+		unitRepo.deleteById(oldUnitName);
+		unitRepo.save(new Unit(newUnitName));
 		
-		try {
-			if(unitSelected != null) {
-				unitSelected.setUnitName(newUnitName);
-				unitRepo.delete(units.get(index));
-				unitRepo.save(unitSelected);
-				return 1;
-			}
-			}catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-			
-			return -1;
+		opsResult = 1;
+		
+	}, () -> {
+		opsResult = -1;
+	});
+	
+	return opsResult;
 		
 	}
 
 	public int deleteUnit(String unitDelete) {
 		
 
-		List<Unit> units = unitRepo.findAll();
-		Unit unitSelected = null;
-		int index = -1;
+		Optional<Unit> unit = unitRepo.findById(unitDelete);
 		
-		for (Unit unit : units) {
-			if(unit.getUnitName().toLowerCase().equals(unitDelete.toLowerCase()))
-			{
-				unitSelected = unit;
-				index = units.indexOf(unit);
-				break;
-			}
-		}
 		
-		try {
-			if(unitSelected != null) {
-				
-				unitRepo.delete(units.get(index));
-				return 1;
-			}
-			}catch(Exception e)
-			{
-				e.printStackTrace();
-			}
+		unit.ifPresentOrElse((value) -> {
 			
-			return -1;
+			unitRepo.deleteById(unitDelete);
+			
+			
+			opsResult = 1;
+			
+		}, () -> {
+			opsResult = -1;
+		});
+		
+		return opsResult;
 	}
 	
 	

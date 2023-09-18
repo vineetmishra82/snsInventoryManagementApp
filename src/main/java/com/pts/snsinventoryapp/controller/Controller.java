@@ -59,19 +59,19 @@ public class Controller {
 		return service.getUnits();
 	}
 	
-	@PostMapping("createUnit")
+	@PostMapping("/createUnit")
 	public int createUnit(@RequestParam String unitName)
 	{
 		return service.createUnit(unitName);
 	}
 	
-	@PostMapping("updateUnit")
+	@PostMapping("/updateUnit")
 	public int updateunit(@RequestParam String oldUnitName,@RequestParam String newUnitName)
 	{
 		return service.updateUnit(oldUnitName,newUnitName);
 	}
 	
-	@DeleteMapping("unitDelete")
+	@DeleteMapping("/unitDelete")
 	public int unitDelete(@RequestParam String unitDelete)
 	{
 		return service.deleteUnit(unitDelete);
