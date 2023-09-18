@@ -109,10 +109,9 @@ public class ServiceData {
 		
 		try {
 			if(unitSelected != null) {
-				units.remove(index);
 				unitSelected.setUnitName(newUnitName);
-				units.add(unitSelected);
-				unitRepo.saveAll(units);
+				unitRepo.delete(units.get(index));
+				unitRepo.save(unitSelected);
 				return 1;
 			}
 			}catch(Exception e)
