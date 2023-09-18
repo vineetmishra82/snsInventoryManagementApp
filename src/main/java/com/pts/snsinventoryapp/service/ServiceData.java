@@ -96,19 +96,23 @@ public class ServiceData {
 		
 		List<Unit> units = unitRepo.findAll();
 		Unit unitSelected = null;
+		int index = -1;
 		
 		for (Unit unit : units) {
 			if(unit.getUnitName().toLowerCase().equals(oldUnitName.toLowerCase()))
 			{
 				unitSelected = unit;
+				index = units.indexOf(unit);
 				break;
 			}
 		}
 		
 		try {
 			if(unitSelected != null) {
+				units.remove(index);
 				unitSelected.setUnitName(newUnitName);
-				unitRepo.save(unitSelected);
+				units.add(unitSelected);
+				unitRepo.saveAll(units);
 				return 1;
 			}
 			}catch(Exception e)
