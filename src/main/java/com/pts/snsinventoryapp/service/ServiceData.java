@@ -122,6 +122,36 @@ public class ServiceData {
 			return -1;
 		
 	}
+
+	public int deleteUnit(String unitDelete) {
+		
+
+		List<Unit> units = unitRepo.findAll();
+		Unit unitSelected = null;
+		int index = -1;
+		
+		for (Unit unit : units) {
+			if(unit.getUnitName().toLowerCase().equals(unitDelete.toLowerCase()))
+			{
+				unitSelected = unit;
+				index = units.indexOf(unit);
+				break;
+			}
+		}
+		
+		try {
+			if(unitSelected != null) {
+				
+				unitRepo.delete(units.get(index));
+				return 1;
+			}
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+			return -1;
+	}
 	
 	
 	
