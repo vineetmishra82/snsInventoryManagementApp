@@ -2,6 +2,7 @@ package com.pts.snsinventoryapp.service;
 
 import java.util.List;
 
+import org.apache.logging.log4j.message.Message;
 import org.bson.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,6 +90,34 @@ public class ServiceData {
 		}
 		
 		return 1;
+	}
+
+	public int updateUnit(String oldUnitName, String newUnitName) {
+		
+		List<Unit> units = unitRepo.findAll();
+		Unit unitSelected = null;
+		
+		for (Unit unit : units) {
+			if(unit.getUnitName().toLowerCase().equals(oldUnitName.toLowerCase()))
+			{
+				unitSelected = unit;
+				break;
+			}
+		}
+		
+		try {
+			if(unitSelected != null) {
+				unitSelected.setUnitName(newUnitName);
+				unitRepo.save(unitSelected);
+				return 1;
+			}
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+			return -1;
+		
 	}
 	
 	

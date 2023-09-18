@@ -63,4 +63,10 @@ public class Controller {
 	{
 		return service.createUnit(unitName);
 	}
+	
+	@PostMapping("updateUnit")
+	public int updateunit(@RequestParam String oldUnitName,@RequestParam String newUnitName)
+	{
+		return service.updateUnit(oldUnitName,newUnitName);
+	}
 }
