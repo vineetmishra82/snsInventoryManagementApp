@@ -11,7 +11,7 @@ import lombok.Setter;
 @Document(collection = "items")
 @RequiredArgsConstructor
 @Data
-public class Item {
+public class TnP {
 
 @Getter
 @Setter

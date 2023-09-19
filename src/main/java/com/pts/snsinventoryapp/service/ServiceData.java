@@ -129,7 +129,7 @@ public class ServiceData {
 			opsResult = 1;
 			
 		}, () -> {
-			opsResult = -1;
+			opsResult = 0;
 		});
 		
 		return opsResult;
@@ -191,7 +191,7 @@ public class ServiceData {
 			opsResult = 1;
 			
 		}, () -> {
-			opsResult = -1;
+			opsResult = 0;
 		});
 		
 		return opsResult;
