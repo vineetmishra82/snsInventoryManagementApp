@@ -76,4 +76,22 @@ public class Controller {
 	{
 		return service.deleteUnit(unitDelete);
 	}
+	
+	@PostMapping("/createCategory")
+	public int createCategory(@RequestParam String categoryName)
+	{
+		return service.createCategory(categoryName);
+	}
+	
+	@PostMapping("/updateCategory")
+	public int updateCategory(@RequestParam String oldCategoryName,@RequestParam String newCategoryName)
+	{
+		return service.updateCategory(oldCategoryName,newCategoryName);
+	}
+	
+	@DeleteMapping("/categoryDelete")
+	public int categoryDelete(@RequestParam String categoryDelete)
+	{
+		return service.deleteCategory(categoryDelete);
+	}
 }

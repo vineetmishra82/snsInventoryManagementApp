@@ -134,7 +134,68 @@ public class ServiceData {
 		
 		return opsResult;
 	}
+
+	public int createCategory(String categoryName) {
+		List<Category> categories = categoryRepo.findAll();
+		
+		for (Category category : categories) {
+			if(category.getCategoryName().toLowerCase().equals(categoryName.toLowerCase()))
+			{
+				return -1;
+			}
+		}
+		
+		try {
+			Category category = new Category(categoryName);
+			categoryRepo.save(category);
+		}
+		catch(Exception e)
+		{
+			return 0;
+		}
+		
+		return 1;
+	}
 	
+	public int updateCategory(String oldCategoryName, String newCategoryName) {
+		
+		Optional<Category> category = categoryRepo.findById(oldCategoryName);
+		
+		
+		category.ifPresentOrElse((value) -> {
+			
+			categoryRepo.deleteById(oldCategoryName);
+			categoryRepo.save(new Category(newCategoryName));
+			
+			opsResult = 1;
+			
+		}, () -> {
+			opsResult = -1;
+		});
+		
+		return opsResult;
+			
+		}
+	
+	public int deleteCategory(String categoryDelete) {
+		
+
+		Optional<Category> category = categoryRepo.findById(categoryDelete);
+		
+		
+		category.ifPresentOrElse((value) -> {
+			
+			categoryRepo.deleteById(categoryDelete);
+			
+			
+			opsResult = 1;
+			
+		}, () -> {
+			opsResult = -1;
+		});
+		
+		return opsResult;
+	}
 	
 	
 	
