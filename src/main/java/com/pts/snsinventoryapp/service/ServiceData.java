@@ -275,7 +275,7 @@ public class ServiceData {
 			opsResult = 0;
 		}
 		
-		return String.valueOf(opsResult)+"-"+String.valueOf(categoriesCreated)+"-"
+		return String.valueOf(opsResult)+"_"+String.valueOf(categoriesCreated)+"_"
 				+String.valueOf(unitsCreated);
 	}
 	
