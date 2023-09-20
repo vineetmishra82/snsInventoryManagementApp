@@ -96,7 +96,7 @@ public class Controller {
 	}
 	
 	@PostMapping("/createTnP")
-	public int createTnP(@RequestParam String tnpName,@RequestParam String category,
+	public String createTnP(@RequestParam String tnpName,@RequestParam String category,
 			@RequestParam String unit,@RequestParam double currentQuantity,@RequestParam String remarks )
 	{
 		return service.createTnP(tnpName,category,unit,currentQuantity,remarks);

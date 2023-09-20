@@ -41,6 +41,8 @@ public class ServiceData {
 	TnPRepo tnPRepo;
 
 	private int opsResult;
+	private int unitsCreated = 0;
+	private int categoriesCreated = 0;
 
 	public boolean adminLogin(String userId, String password) {
 		
@@ -203,7 +205,10 @@ public class ServiceData {
 		return opsResult;
 	}
 
-	public int createTnP(String tnpName, String categoryName, String unitName, double currentQuantity, String remarks) {
+	public String createTnP(String tnpName, String categoryName, String unitName, double currentQuantity, String remarks) {
+		
+		String returnValue = "";
+		
 		
 		try {
 			Optional<Unit> unit = unitRepo.findById(unitName);
@@ -236,24 +241,42 @@ public class ServiceData {
 						tnPRepo.save(new TnP(id ,tnpName, value1, value, currentQuantity, remarks));						
 						
 						opsResult = 1;
+						
 					}
 					else {
 						opsResult = -1;
 					}				
 					
 				}, () -> {
-					opsResult = 0;
+					if(createCategory(categoryName)==1)
+					{
+						categoriesCreated++;
+						createTnP(tnpName, categoryName, unitName, currentQuantity, remarks);
+						
+					}
+					else {
+						opsResult = 0;
+					}
 				});
 				
 			},() -> {
-				opsResult = 0;	
+				if(createUnit(unitName)==1)
+				{
+					unitsCreated++;
+					createTnP(tnpName, categoryName, unitName, currentQuantity, remarks);
+				}
+				else {
+					opsResult = 0;
+				}
+				
 			});			
 			
 		}catch (Exception e) {
 			opsResult = 0;
 		}
 		
-		return opsResult;
+		return String.valueOf(opsResult)+"-"+String.valueOf(categoriesCreated)+"-"
+				+String.valueOf(unitsCreated);
 	}
 	
 	
