@@ -275,7 +275,7 @@ public class ServiceData {
 			opsResult = 0;
 		}
 		
-		return (opsResult+"_"+categoriesCreated+"_"+unitsCreated);
+		return (opsResult+"");
 	}
 	
 	
