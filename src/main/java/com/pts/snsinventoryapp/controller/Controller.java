@@ -94,4 +94,11 @@ public class Controller {
 	{
 		return service.deleteCategory(categoryDelete);
 	}
+	
+	@PostMapping("/createTnP")
+	public int createTnP(@RequestParam String tnpName,@RequestParam String category,
+			@RequestParam String unit,@RequestParam double currentQuantity,@RequestParam String remarks )
+	{
+		return service.createTnP(tnpName,category,unit,currentQuantity,remarks);
+	}
 }

@@ -10,11 +10,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mongodb.client.model.ReturnDocument;
 import com.pts.snsinventoryapp.model.Admin;
 import com.pts.snsinventoryapp.model.Category;
+import com.pts.snsinventoryapp.model.TnP;
 import com.pts.snsinventoryapp.model.Unit;
 import com.pts.snsinventoryapp.repositories.AdminRepo;
 import com.pts.snsinventoryapp.repositories.CategoryRepo;
+import com.pts.snsinventoryapp.repositories.TnPRepo;
 import com.pts.snsinventoryapp.repositories.UnitRepo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +36,9 @@ public class ServiceData {
 	
 	@Autowired
 	UnitRepo unitRepo;
+	
+	@Autowired
+	TnPRepo tnPRepo;
 
 	private int opsResult;
 
@@ -193,6 +199,59 @@ public class ServiceData {
 		}, () -> {
 			opsResult = 0;
 		});
+		
+		return opsResult;
+	}
+
+	public int createTnP(String tnpName, String categoryName, String unitName, double currentQuantity, String remarks) {
+		
+		try {
+			Optional<Unit> unit = unitRepo.findById(unitName);
+			
+			unit.ifPresentOrElse((value)->{
+				
+				Optional<Category> category = categoryRepo.findById(categoryName);
+				
+				
+				category.ifPresentOrElse((value1) -> {
+					
+					String id = "SNS-"+
+							(categoryName.length() > 3 ? categoryName.substring(0,3) : categoryName ) +"-"+
+							String.format("%03d", (tnPRepo.count()+1));
+					
+					boolean isOk = true;
+					
+					for (TnP tnp : tnPRepo.findAll()) {
+						
+						if(tnp.getTnpName().toLowerCase().equals(tnpName.toLowerCase()))
+						{
+							isOk = false;
+							break;
+						}
+						
+					}
+					
+					if(isOk)
+					{
+						tnPRepo.save(new TnP(id ,tnpName, value1, value, currentQuantity, remarks));						
+						
+						opsResult = 1;
+					}
+					else {
+						opsResult = -1;
+					}				
+					
+				}, () -> {
+					opsResult = 0;
+				});
+				
+			},() -> {
+				opsResult = 0;	
+			});			
+			
+		}catch (Exception e) {
+			opsResult = 0;
+		}
 		
 		return opsResult;
 	}

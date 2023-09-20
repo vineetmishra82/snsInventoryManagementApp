@@ -5,6 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import com.pts.snsinventoryapp.model.TnP;
 
 
-public interface ItemRepo extends MongoRepository<TnP, String> {
+public interface TnPRepo extends MongoRepository<TnP, String> {
 
 }
