@@ -207,7 +207,7 @@ public class ServiceData {
 
 	public String createTnP(String tnpName, String categoryName, String unitName, double currentQuantity, String remarks) {
 		
-		String returnValue = "";
+		
 		
 		
 		try {
@@ -275,7 +275,8 @@ public class ServiceData {
 			opsResult = 0;
 		}
 		
-		return (opsResult+"");
+		String returnValue = opsResult+"_"+categoriesCreated+"_"+unitsCreated;
+		return returnValue;
 	}
 	
 	
