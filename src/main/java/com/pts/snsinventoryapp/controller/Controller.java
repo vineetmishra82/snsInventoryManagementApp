@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pts.snsinventoryapp.model.Category;
+import com.pts.snsinventoryapp.model.TnP;
 import com.pts.snsinventoryapp.model.Unit;
 import com.pts.snsinventoryapp.service.ServiceData;
 
@@ -100,5 +101,11 @@ public class Controller {
 			@RequestParam String unit,@RequestParam double currentQuantity,@RequestParam String remarks )
 	{
 		return service.createTnP(tnpName,category,unit,currentQuantity,remarks);
+	}
+	
+	@GetMapping("/getTnP")
+	public List<TnP> getTnP()  {
+		
+		return service.getTnP();
 	}
 }

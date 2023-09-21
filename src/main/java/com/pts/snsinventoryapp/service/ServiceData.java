@@ -256,7 +256,8 @@ public class ServiceData {
 					
 					String id = "SNS-"+
 							(categoryName.length() > 3 ? categoryName.substring(0,3) : categoryName ) +"-"+
-							String.format("%03d", (tnPRepo.count()+1));
+							(tnPRepo.count()<1000 ? String.format("%03d", (tnPRepo.count()+1)) :  
+									(tnPRepo.count()+1));
 					
 					boolean isOk = true;
 					
@@ -312,6 +313,13 @@ public class ServiceData {
 		String returnValue = opsResult+"_"+categoriesCreated+"_"+unitsCreated;
 		return returnValue.trim();
 	}
+
+	public List<TnP> getTnP() {
+		// TODO Auto-generated method stub
+		return tnPRepo.findAll();
+	}
+	
+	
 	
 	
 	
