@@ -272,7 +272,7 @@ public class ServiceData {
 			opsResult = 0;
 		}
 		
-		String returnValue = opsResult+"bla"+categoriesCreated+"bla"+unitsCreated;
+		String returnValue = opsResult+"_"+categoriesCreated+"_"+unitsCreated;
 		return returnValue.trim();
 	}
 	
