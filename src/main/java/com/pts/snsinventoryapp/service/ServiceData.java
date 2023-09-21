@@ -207,9 +207,6 @@ public class ServiceData {
 
 	public String createTnP(String tnpName, String categoryName, String unitName, double currentQuantity, String remarks) {
 		
-		
-		
-		
 		try {
 			Optional<Unit> unit = unitRepo.findById(unitName);
 			
@@ -275,7 +272,7 @@ public class ServiceData {
 			opsResult = 0;
 		}
 		
-		String returnValue = opsResult+"_"+categoriesCreated+"_"+unitsCreated;
+		String returnValue = opsResult+" "+categoriesCreated+" "+unitsCreated;
 		return returnValue;
 	}
 	
