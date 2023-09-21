@@ -125,16 +125,34 @@ public class ServiceData {
 
 	public int deleteUnit(String unitDelete) {
 		
-
+		opsResult = 0;
+		
 		Optional<Unit> unit = unitRepo.findById(unitDelete);
 		
 		
 		unit.ifPresentOrElse((value) -> {
 			
-			unitRepo.deleteById(unitDelete);
+			//Checking if existing in any T&P
+			
+			for (TnP tp : tnPRepo.findAll()) {
+				
+				if(tp.getUnit().getUnitName().toLowerCase().equals(unitDelete))
+				{
+					opsResult = 5;
+					break;
+				}
+				
+			}
+			
+			if(opsResult!=5)
+			{
+				unitRepo.deleteById(unitDelete);
+				
+				
+				opsResult = 1;
+			}
 			
 			
-			opsResult = 1;
 			
 		}, () -> {
 			opsResult = 0;
@@ -187,16 +205,32 @@ public class ServiceData {
 	
 	public int deleteCategory(String categoryDelete) {
 		
+		opsResult = 0;
 
 		Optional<Category> category = categoryRepo.findById(categoryDelete);
 		
 		
 		category.ifPresentOrElse((value) -> {
 			
-			categoryRepo.deleteById(categoryDelete);
+			//Checking if existing in any T&P
 			
+			for (TnP tp : tnPRepo.findAll()) {
+				
+				if(tp.getCategory().getCategoryName().toLowerCase().equals(categoryDelete))
+				{
+					opsResult = 5;
+					break;
+				}
+				
+			}
 			
-			opsResult = 1;
+			if(opsResult!=5)
+			{
+				categoryRepo.deleteById(categoryDelete);
+				
+				
+				opsResult = 1;
+			}		
 			
 		}, () -> {
 			opsResult = 0;
