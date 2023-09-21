@@ -272,8 +272,8 @@ public class ServiceData {
 			opsResult = 0;
 		}
 		
-		String returnValue = opsResult+" "+categoriesCreated+" "+unitsCreated;
-		return returnValue;
+		String returnValue = opsResult+"bla"+categoriesCreated+"bla"+unitsCreated;
+		return returnValue.trim();
 	}
 	
 	
