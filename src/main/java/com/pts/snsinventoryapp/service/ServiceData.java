@@ -250,9 +250,9 @@ public class ServiceData {
 				}, () -> {
 					if(createCategory(categoryName)==1)
 					{
-						categoriesCreated++;
-						createTnP(tnpName, categoryName, unitName, currentQuantity, remarks);
 						
+						createTnP(tnpName, categoryName, unitName, currentQuantity, remarks);
+						categoriesCreated++;
 					}
 					else {
 						opsResult = 0;
@@ -262,8 +262,8 @@ public class ServiceData {
 			},() -> {
 				if(createUnit(unitName)==1)
 				{
-					unitsCreated++;
 					createTnP(tnpName, categoryName, unitName, currentQuantity, remarks);
+					unitsCreated++;
 				}
 				else {
 					opsResult = 0;
