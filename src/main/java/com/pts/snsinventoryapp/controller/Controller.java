@@ -118,7 +118,7 @@ public class Controller {
 		return service.updateTnP(tnpId,editCategory,editUnit,editRemarks);
 	}
 
-	@DeleteMapping("deleteTnP?tnpId=")
+	@DeleteMapping("/deleteTnP")
 	public int deleteTnP(@RequestParam String tnpId)
 	{
 		return service.deleteTnP(tnpId);
