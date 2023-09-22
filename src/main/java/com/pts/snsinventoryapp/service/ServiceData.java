@@ -318,6 +318,45 @@ public class ServiceData {
 		// TODO Auto-generated method stub
 		return tnPRepo.findAll();
 	}
+
+	public int updateTnP(String tnpId, String editCategory, String editUnit, String editRemarks) {
+		
+		Optional<Category> category = categoryRepo.findById(editCategory);
+		
+		category.ifPresentOrElse((categoryValue) -> {
+			
+			Optional<Unit> unit = unitRepo.findById(editUnit);
+			
+			unit.ifPresentOrElse((unitValue)->{
+				
+				Optional<TnP> tnp = tnPRepo.findById(tnpId);
+				
+				tnp.ifPresentOrElse((tnpvalue)->{
+					
+					tnpvalue.setCategory(categoryValue);
+					tnpvalue.setUnit(unitValue);
+					tnpvalue.setRemarks(editRemarks);
+					
+					tnPRepo.save(tnpvalue);
+					
+					opsResult = 1;
+					
+				}, ()->{
+					opsResult = -1;
+				});
+				
+				
+				
+			}, ()->{
+				opsResult = -1;
+			});
+			
+		}, ()-> {
+			opsResult = -1;
+		});
+		
+		return opsResult;
+	}
 	
 	
 	

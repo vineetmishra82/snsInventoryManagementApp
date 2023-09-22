@@ -108,4 +108,15 @@ public class Controller {
 		
 		return service.getTnP();
 	}
+	
+	
+
+	@PostMapping("/updateTnP")
+	public int updateTnP(@RequestParam String tnpId,@RequestParam String editCategory,
+			@RequestParam String editUnit,@RequestParam String editRemarks)
+	{
+		return service.updateTnP(tnpId,editCategory,editUnit,editRemarks);
+	}
+
+
 }
