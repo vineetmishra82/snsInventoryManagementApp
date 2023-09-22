@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mongodb.client.model.ReturnDocument;
 import com.pts.snsinventoryapp.model.Admin;
@@ -357,10 +359,17 @@ public class ServiceData {
 		
 		return opsResult;
 	}
-	
-	
-	
-	
-	
 
+	public int deleteTnP(String tnpId) {
+		
+		try {
+			tnPRepo.deleteById(tnpId);
+			return 1;
+		}catch(Exception e)
+		{
+			return -1;
+		}
+	}
+	
+	
 }
