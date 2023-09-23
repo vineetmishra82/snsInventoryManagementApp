@@ -353,11 +353,27 @@ public class ServiceData {
 				
 				
 			}, ()->{
-				opsResult = -1;
+				if(createUnit(editUnit)==1)
+				{
+					
+					updateTnP(tnpId,editCategory,editUnit,editRemarks);
+					
+				}
+				else {
+					opsResult = -1;
+				}
 			});
 			
 		}, ()-> {
-			opsResult = -1;
+			if(createCategory(editCategory)==1)
+			{
+				
+				updateTnP(tnpId,editCategory,editUnit,editRemarks);
+				
+			}
+			else {
+				opsResult = -1;
+			}
 		});
 		
 		return opsResult;
