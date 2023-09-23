@@ -218,13 +218,16 @@ public class ServiceData {
 			
 			for (TnP tp : tnPRepo.findAll()) {
 				
-				if(tp.getCategory().getCategoryName().toLowerCase().equals(categoryDelete))
+				if(tp.getCategory().getCategoryName().toLowerCase().equals(categoryDelete.toLowerCase()))
 				{
+					
 					opsResult = 5;
 					break;
 				}
 				
 			}
+			
+			log.info("For matching cat, opsresult is "+opsResult);
 			
 			if(opsResult!=5)
 			{
